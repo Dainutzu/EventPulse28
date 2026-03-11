@@ -1,52 +1,48 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Compass, User } from "lucide-react";
+import Link from "next/link";
+import { Compass, User, UserCircle2, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function BottomNav() {
   const pathname = usePathname();
 
   const tabs = [
-    { href: "/explore", label: "Explore", icon: Compass },
-    { href: "/profile", label: "Profile", icon: User },
+    { name: "Explore", icon: Compass, href: "/explore" },
+    { name: "Clubs", icon: UserCircle2, href: "/clubs" },
+    { name: "Attendance", icon: CheckCircle2, href: "/attendance" },
+    { name: "Profile", icon: User, href: "/profile" },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 flex justify-center">
-      <div className="w-full max-w-md bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-t border-neutral-200 dark:border-neutral-800">
-        <div className="flex items-stretch">
-          {tabs.map(({ href, label, icon: Icon }) => {
-            const active = pathname === href || pathname.startsWith(href + "/");
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={`flex-1 flex flex-col items-center justify-center py-3 gap-1 transition-all duration-200 ${
-                  active
-                    ? "text-neutral-900 dark:text-white"
-                    : "text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300"
-                }`}
-              >
-                <Icon
-                  size={22}
-                  strokeWidth={active ? 2.2 : 1.8}
-                  className="transition-all duration-200"
+    <nav className="fixed bottom-0 w-full max-w-md bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-t border-neutral-100 dark:border-neutral-800 px-6 py-3 pb-8 z-50">
+      <div className="flex justify-between items-center">
+        {tabs.map((tab) => {
+          const isActive = pathname === tab.href;
+          return (
+            <Link
+              key={tab.name}
+              href={tab.href}
+              className={`flex flex-col items-center gap-1 transition-all ${
+                isActive 
+                  ? "text-blue-600 dark:text-blue-400 scale-110" 
+                  : "text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200"
+              }`}
+            >
+              <tab.icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+              <span className={`text-[10px] font-black uppercase tracking-widest transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-0 h-0"}`}>
+                {tab.name}
+              </span>
+              {isActive && (
+                <motion.div 
+                  layoutId="activeTab"
+                  className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-0.5"
                 />
-                <span
-                  className={`text-xs font-medium transition-all duration-200 ${
-                    active ? "opacity-100" : "opacity-70"
-                  }`}
-                >
-                  {label}
-                </span>
-                {active && (
-                  <span className="absolute bottom-1 w-1 h-1 rounded-full bg-neutral-900 dark:bg-white" />
-                )}
-              </Link>
-            );
-          })}
-        </div>
+              )}
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );

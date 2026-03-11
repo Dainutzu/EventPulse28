@@ -2,24 +2,27 @@ export interface Event {
   id: string;
   title: string;
   date: string;
-  location: string;
-  category: string;
-  description: string;
-  organizer: string;
   time: string;
+  location: string;
+  category: string; // Misc category: Sports, Music, Social, Workshops, Hackathons
+  faculty: string;  // Faculty category: Computing, Business, Architecture, Humanities & Sciences, Law, Hospitality
+  organizer: string;
+  description: string;
+  price: string;
 }
 
 export const events: Event[] = [
   {
     id: "1",
-    title: "Hackathon 2026",
+    title: "AI Hackathon 2026",
     date: "March 20, 2026",
     time: "9:00 AM",
-    location: "Faculty of Computing, Lab Block A",
-    category: "Computing",
-    organizer: "Faculty of Computing",
-    description:
-      "Join us for a 24-hour coding marathon where teams compete to build innovative software solutions. Open to all students across faculties. Prizes worth over $5,000 await the top three teams. Mentors from leading tech companies will be on-site to guide participants.",
+    location: "Computing Lab Block A",
+    category: "Hackathons",
+    faculty: "Computing",
+    organizer: "Computing Society",
+    price: "Free",
+    description: "The ultimate 24-hour coding challenge. Build, innovate, and win prizes for the best AI-driven solutions. Mentors from top tech firms will be available."
   },
   {
     id: "2",
@@ -27,65 +30,71 @@ export const events: Event[] = [
     date: "March 25, 2026",
     time: "6:00 PM",
     location: "Business School Auditorium",
-    category: "Business",
-    organizer: "School of Business",
-    description:
-      "Present your startup idea to a panel of investors and industry veterans. Whether you have a business plan or just a concept, this is your chance to get feedback, mentorship, and potentially secure seed funding. Networking dinner follows the pitching session.",
+    category: "Workshops",
+    faculty: "Business",
+    organizer: "Entrepreneurship Club",
+    price: "Free",
+    description: "Pitch your startup idea to actual investors. Gain feedback, networking opportunities, and a chance for seed funding."
   },
   {
     id: "3",
-    title: "Design Exhibition",
+    title: "Design Expo '26",
     date: "April 2, 2026",
     time: "10:00 AM",
-    location: "Architecture Gallery, Main Campus",
-    category: "Architecture",
-    organizer: "School of Architecture",
-    description:
-      "A curated showcase of student design projects spanning urban planning, sustainable architecture, and interior design. Explore the creative visions of tomorrow's architects and designers. Industry professionals will provide live critique sessions throughout the day.",
+    location: "Architecture Gallery",
+    category: "Social",
+    faculty: "Architecture",
+    organizer: "Design Collective",
+    price: "Free",
+    description: "A showcase of sustainable and urban design projects by graduating students. Explore the future of architecture."
   },
   {
     id: "4",
-    title: "Legal Forum 2026",
+    title: "Legal Debate Forum",
     date: "April 8, 2026",
     time: "2:00 PM",
-    location: "Law Faculty Moot Court",
-    category: "Law",
-    organizer: "School of Law",
-    description:
-      "An annual symposium bringing together legal scholars, practitioners, and students to discuss pressing issues in contemporary law. This year's theme is Technology and the Law. Guest speakers include senior counsel and High Court judges.",
+    location: "Law Moot Court",
+    category: "Social",
+    faculty: "Law",
+    organizer: "Legal Society",
+    price: "$5",
+    description: "A high-stakes debate forum on the ethics of AI in modern law. Open to all students for observation and Q&A."
   },
   {
     id: "5",
     title: "Hospitality Workshop",
     date: "April 14, 2026",
     time: "11:00 AM",
-    location: "Hospitality School, Demo Kitchen",
-    category: "Hospitality",
+    location: "Hospitality Suite",
+    category: "Workshops",
+    faculty: "Hospitality",
     organizer: "Hospitality School",
-    description:
-      "A hands-on workshop exploring modern hospitality management, culinary arts, and event planning. Participants will engage in live cooking demonstrations, customer service simulations, and a guided tour of the school's five-star training restaurant.",
+    price: "$10",
+    description: "Learn the art of fine dining management and hospitality excellence from industry professionals."
   },
   {
     id: "6",
     title: "Research Symposium",
     date: "April 19, 2026",
     time: "9:00 AM",
-    location: "Humanities Block, Seminar Hall",
-    category: "Humanities",
-    organizer: "Humanities & Sciences Faculty",
-    description:
-      "An interdisciplinary research conference where students and faculty present original work across the humanities and social sciences. Topics include history, philosophy, linguistics, and cultural studies. Open to the entire academic community.",
+    location: "Main Seminar Hall",
+    category: "Social",
+    faculty: "Humanities & Sciences",
+    organizer: "Science Union",
+    price: "Free",
+    description: "Interdisciplinary research presentations covering everything from climate science to modern philosophy."
   },
   {
     id: "7",
     title: "University Sports Meet",
     date: "April 26, 2026",
     time: "7:00 AM",
-    location: "University Sports Complex",
+    location: "Sports Complex",
     category: "Sports",
-    organizer: "Sports Department",
-    description:
-      "The biggest inter-faculty sports competition of the year. Compete in athletics, swimming, football, basketball, and more. Earn points for your faculty and take home the coveted Sports Meet Trophy. All students are encouraged to participate.",
+    faculty: "Misc",
+    organizer: "Sports Union",
+    price: "Free",
+    description: "The biggest inter-faculty sports competition. Athletics, team sports, and spirit trophies up for grabs!"
   },
   {
     id: "8",
@@ -94,10 +103,52 @@ export const events: Event[] = [
     time: "7:30 PM",
     location: "Campus Amphitheatre",
     category: "Music",
+    faculty: "Misc",
     organizer: "Music Society",
-    description:
-      "A magical evening of live performances featuring student bands, solo artists, and the university orchestra. From classical to contemporary, experience the breadth of musical talent on campus. Food stalls and a drinks bar will be available throughout the event.",
+    price: "Free",
+    description: "A night of acoustic and rock performances by campus bands. Food courts and chill vibes included."
   },
+  {
+    id: "9",
+    title: "Entrepreneurship Summit",
+    date: "May 10, 2026",
+    time: "10:00 AM",
+    location: "Grand Ballroom",
+    category: "Workshops",
+    faculty: "Business",
+    organizer: "Entrepreneurship Club",
+    price: "$15",
+    description: "Keynote speeches from successful alumni and workshops on scaling small businesses."
+  },
+  {
+    id: "10",
+    title: "Cultural Festival",
+    date: "May 15, 2026",
+    time: "4:00 PM",
+    location: "Central Square",
+    category: "Social",
+    faculty: "Misc",
+    organizer: "Student Council",
+    price: "Free",
+    description: "Celebrating diversity with food, dance, and art from over 20 different cultures represented on campus."
+  }
+];
+
+export const facultyCategories = [
+  "Computing",
+  "Business",
+  "Architecture",
+  "Humanities & Sciences",
+  "Law",
+  "Hospitality"
+];
+
+export const miscCategories = [
+  "Sports",
+  "Music",
+  "Social",
+  "Workshops",
+  "Hackathons"
 ];
 
 export const categoryColors: Record<string, string> = {
@@ -106,7 +157,11 @@ export const categoryColors: Record<string, string> = {
   Architecture: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300",
   Law: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
   Hospitality: "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300",
-  Humanities: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300",
+  "Humanities & Sciences": "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300",
   Sports: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
   Music: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
+  Social: "bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300",
+  Workshops: "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300",
+  Hackathons: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300",
+  Misc: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
 };
