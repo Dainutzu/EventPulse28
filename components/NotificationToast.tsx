@@ -2,7 +2,7 @@
 
 import { useApp } from "@/context/AppContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bell, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 
 export default function NotificationToast() {
   const { notifications } = useApp();

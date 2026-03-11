@@ -7,6 +7,12 @@ interface RegisteredEvent extends Event {
   ticketId: string;
 }
 
+interface Notification {
+  id: string;
+  title: string;
+  message: string;
+}
+
 interface User {
   name: string;
   email: string;
@@ -14,7 +20,7 @@ interface User {
 
 interface AppContextType {
   user: User | null;
-  signIn: () => void;
+  signIn: (email: string) => void;
   registeredEvents: RegisteredEvent[];
   registerEvent: (event: Event) => void;
   isRegistered: (id: string) => boolean;
@@ -22,7 +28,7 @@ interface AppContextType {
   checkIn: (id: string) => void;
   isAttended: (id: string) => boolean;
   points: number;
-  notifications: any[];
+  notifications: Notification[];
   addNotification: (title: string, message: string) => void;
   followedClubs: string[];
   toggleFollowClub: (id: string) => void;
@@ -38,7 +44,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [registeredEvents, setRegisteredEvents] = useState<RegisteredEvent[]>([]);
   const [attendedEvents, setAttendedEvents] = useState<string[]>([]);
   const [points, setPoints] = useState(0);
-  const [notifications, setNotifications] = useState<any[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [followedClubs, setFollowedClubs] = useState<string[]>([]);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -65,8 +71,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const signIn = () => {
-    const newUser = { name: "Viyath De Silva", email: "viyath.desilva@university.edu" };
+  const signIn = (email: string) => {
+    // Extract a name from email or use a premium default
+    const namePart = email.split('@')[0];
+    const name = namePart.charAt(0).toUpperCase() + namePart.slice(1).replace('.', ' ');
+    const newUser = { name: name || "Viyath De Silva", email };
     setUser(newUser);
     localStorage.setItem("ep_user", JSON.stringify(newUser));
   };
@@ -85,7 +94,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       const ticketId = `TKT-${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
       const updated = [...prev, { ...event, ticketId }];
       localStorage.setItem("ep_registered_v2", JSON.stringify(updated));
-      addNotification("Registration Confirmed", `You're all set for ${event.title}!`);
+      addNotification("Seat Secured", `Success! You are registered for ${event.title}.`);
       return updated;
     });
   };

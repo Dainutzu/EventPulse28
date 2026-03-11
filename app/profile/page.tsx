@@ -15,10 +15,12 @@ import {
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
-  const { registeredEvents, attendedEvents, points, darkMode, toggleDarkMode } = useApp();
-  const [selectedTicket, setSelectedTicket] = useState<any>(null);
+  const { user, registeredEvents, attendedEvents, points, darkMode, toggleDarkMode } = useApp();
+  const [selectedTicket, setSelectedTicket] = useState<typeof registeredEvents[0] | null>(null);
+  const router = useRouter();
 
   const handleDownloadPortfolio = () => {
     const headers = ["Title", "Date", "Category", "Status", "Points Earned"];
@@ -35,11 +37,18 @@ export default function ProfilePage() {
 
     const csvContent = [
       ["STUDENT PARTICIPATION PORTFOLIO"],
-      ["Name: Viyath De Silva", "Email: viyath.desilva@university.edu"],
+      ["Name", user?.name || "Viyath De Silva"],
+      ["Email", user?.email || "viyath.desilva@university.edu"],
       [`Total Pulse Points: ${points}`],
       [],
+      ["--- ACTIVE REGISTRATIONS ---"],
       headers,
-      ...rows
+      ...rows,
+      [],
+      ["--- ORGANIZED EVENTS (SIMULATED) ---"],
+      ["Event Name", "Role", "Impact"],
+      ["Pulse Hackathon", "Lead Organizer", "400+ participants"],
+      ["Tech Talk Series", "Moderator", "150+ attendees"]
     ].map(e => e.join(",")).join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -101,6 +110,33 @@ export default function ProfilePage() {
         </button>
       </div>
 
+      {/* Pulse Impact Summary */}
+      <div className="px-6 mb-12">
+        <div className="p-8 rounded-[3rem] bg-neutral-900 text-white relative overflow-hidden group border border-white/5 shadow-2xl">
+          <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
+             <Zap size={150} />
+          </div>
+          <div className="relative z-10">
+            <h1 className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.3em] mb-6">Pulse Impact Dashboard</h1>
+            <div className="flex items-end gap-3 mb-8">
+               <span className="text-5xl font-black tracking-tighter">98.5</span>
+               <span className="text-xs font-black text-blue-400 uppercase tracking-widest mb-2">/ 100 Percentile</span>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+               <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                  <p className="text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1">Engaged</p>
+                  <p className="text-lg font-black uppercase">{attendedEvents.length} Events</p>
+               </div>
+               <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                  <p className="text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1">Organized</p>
+                  <p className="text-lg font-black uppercase">2 Leads</p>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Settings Grid */}
       <div className="px-6 grid grid-cols-2 gap-4 mb-12">
         <button
@@ -133,7 +169,7 @@ export default function ProfilePage() {
                <p className="text-neutral-400 text-sm font-bold">No active registrations.</p>
             </div>
           ) : (
-            registeredEvents.map((event) => (
+            registeredEvents?.map((event) => (
               <motion.div
                 key={event.id}
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -152,9 +188,20 @@ export default function ProfilePage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-neutral-500">
                     <Eye size={14} />
-                    <span className="text-[10px] font-black uppercase tracking-widest">View Ticket</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest">Digital Ticket</span>
                   </div>
-                  <ChevronRight size={16} className="text-neutral-300 group-hover:translate-x-1 transition-transform" />
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(`/events/${event.id}`);
+                      }}
+                      className="px-4 py-2 rounded-xl bg-neutral-100 dark:bg-neutral-700 text-[9px] font-black uppercase tracking-widest text-neutral-500 hover:bg-blue-600 hover:text-white transition-all"
+                    >
+                      View Event
+                    </button>
+                    <ChevronRight size={16} className="text-neutral-300 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
               </motion.div>
             ))

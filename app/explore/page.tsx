@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { events, faculties, miscCategories, categoryColors } from "@/lib/events";
-import { Search, Filter, Calendar, MapPin, ChevronRight, X, Sparkles } from "lucide-react";
-import Link from "next/link";
+import Image from "next/image";
+import { events, faculties, miscCategories } from "@/lib/events";
+import { Search, Filter, Calendar, ChevronRight, X, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -58,7 +58,7 @@ export default function ExplorePage() {
           </div>
           <input
             type="text"
-            placeholder="Search events, organizers..."
+            placeholder="Search events, workshops..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-14 pr-6 py-5 bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-100 dark:border-neutral-800 rounded-[2rem] text-sm font-bold placeholder:text-neutral-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500/50 transition-all shadow-sm"
@@ -74,7 +74,7 @@ export default function ExplorePage() {
         >
           All Pulse
         </button>
-        {faculties.slice(0, 3).map(faculty => (
+        {faculties?.slice(0, 3)?.map(faculty => (
           <button
             key={faculty}
             onClick={() => setSelectedFaculty(faculty === selectedFaculty ? null : faculty)}
@@ -93,7 +93,7 @@ export default function ExplorePage() {
              <button onClick={clearFilters} className="text-blue-600 text-xs font-black uppercase tracking-widest mt-4">Reset Search</button>
           </div>
         ) : (
-          filteredEvents.map((event, i) => (
+          filteredEvents?.map((event, i) => (
             <motion.div
               key={event.id}
               initial={{ opacity: 0, y: 20 }}
@@ -103,10 +103,13 @@ export default function ExplorePage() {
               className="group relative bg-white dark:bg-neutral-800 rounded-[2.5rem] border border-neutral-100 dark:border-neutral-700 overflow-hidden shadow-sm active:scale-[0.98] transition-all cursor-pointer"
             >
               <div className="aspect-[16/9] overflow-hidden relative">
-                <img 
+                <Image 
                   src={event.image} 
                   alt={event.title}
+                  width={800}
+                  height={450}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  unoptimized
                 />
                 <div className="absolute top-4 left-4">
                   <span className={`inline-block text-[9px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest backdrop-blur-md bg-white/90 text-neutral-900 shadow-sm`}>
@@ -173,7 +176,7 @@ export default function ExplorePage() {
                 <div>
                   <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 mb-4">Faculties</h3>
                   <div className="grid grid-cols-2 gap-2">
-                    {faculties.map(faculty => (
+                    {faculties?.map(faculty => (
                       <button
                         key={faculty}
                         onClick={() => setSelectedFaculty(faculty === selectedFaculty ? null : faculty)}
@@ -188,7 +191,7 @@ export default function ExplorePage() {
                 <div>
                   <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 mb-4">Categories</h3>
                   <div className="grid grid-cols-2 gap-2">
-                    {miscCategories.map(cat => (
+                    {miscCategories?.map(cat => (
                       <button
                         key={cat}
                         onClick={() => setSelectedMisc(cat === selectedMisc ? null : cat)}

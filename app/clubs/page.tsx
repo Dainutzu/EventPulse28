@@ -33,7 +33,7 @@ export default function ClubsPage() {
 
       {/* Clubs Grid */}
       <div className="px-6 space-y-6">
-        {clubs.map((club, i) => {
+        {clubs?.map((club, i) => {
           const following = isFollowingClub(club.id);
           return (
             <motion.div
@@ -49,8 +49,8 @@ export default function ClubsPage() {
                 </div>
 
                 <div className="flex justify-between items-start mb-6">
-                  <div className="w-16 h-16 rounded-[1.8rem] bg-neutral-50 dark:bg-neutral-700/50 flex items-center justify-center text-3xl shadow-inner border border-neutral-100 dark:border-neutral-600">
-                    {club.image}
+                  <div className="w-16 h-16 rounded-[1.8rem] overflow-hidden border border-neutral-100 dark:border-neutral-600 shadow-inner">
+                    <img src={club.image} alt={club.name} className="w-full h-full object-cover" />
                   </div>
                   <button
                     onClick={() => toggleFollowClub(club.id)}

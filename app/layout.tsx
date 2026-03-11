@@ -4,7 +4,6 @@ import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 import BottomNav from "@/components/BottomNav";
 import PageTransition from "@/components/PageTransition";
-import { AnimatePresence } from "framer-motion";
 import AuthGuard from "@/components/AuthGuard";
 import NotificationToast from "@/components/NotificationToast";
 
@@ -32,11 +31,9 @@ export default function RootLayout({
             <div className="w-full max-w-md min-h-screen relative bg-white dark:bg-neutral-900 shadow-2xl overflow-x-hidden flex flex-col">
               <AuthGuard>
                 <NotificationToast />
-                <AnimatePresence mode="wait">
-                  <PageTransition key="main">
-                    {children}
-                  </PageTransition>
-                </AnimatePresence>
+                <PageTransition>
+                  {children}
+                </PageTransition>
                 <BottomNav />
               </AuthGuard>
             </div>

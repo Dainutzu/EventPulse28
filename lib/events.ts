@@ -4,11 +4,14 @@ export interface Event {
   date: string;
   time: string;
   location: string;
-  category: string; // Misc category: Sports, Music, Social, Workshops, Hackathons
-  faculty: string;  // Faculty category: Computing, Business, Architecture, Humanities & Sciences, Law, Hospitality
-  organizer: string;
+  isInterUniversity?: boolean;
+  category: string; 
+  faculty: string;  
+  organiser: string;
   description: string;
   price: string;
+  image: string;
+  capacity: string;
 }
 
 export const events: Event[] = [
@@ -20,9 +23,12 @@ export const events: Event[] = [
     location: "Computing Lab Block A",
     category: "Hackathons",
     faculty: "Computing",
-    organizer: "Computing Society",
+    organiser: "Computing Society",
     price: "Free",
-    description: "The ultimate 24-hour coding challenge. Build, innovate, and win prizes for the best AI-driven solutions. Mentors from top tech firms will be available."
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=800",
+    capacity: "120",
+    description: "The ultimate 24-hour coding challenge. Build, innovate, and win prizes for the best AI-driven solutions. Mentors from top tech firms will be available.",
+    isInterUniversity: true
   },
   {
     id: "2",
@@ -32,9 +38,12 @@ export const events: Event[] = [
     location: "Business School Auditorium",
     category: "Workshops",
     faculty: "Business",
-    organizer: "Entrepreneurship Club",
+    organiser: "Entrepreneurship Club",
     price: "Free",
-    description: "Pitch your startup idea to actual investors. Gain feedback, networking opportunities, and a chance for seed funding."
+    image: "https://images.unsplash.com/photo-1475721027187-402ad2989a38?auto=format&fit=crop&q=80&w=800",
+    capacity: "250",
+    description: "Pitch your startup idea to actual investors. Gain feedback, networking opportunities, and a chance for seed funding.",
+    isInterUniversity: true
   },
   {
     id: "3",
@@ -44,8 +53,10 @@ export const events: Event[] = [
     location: "Architecture Gallery",
     category: "Social",
     faculty: "Architecture",
-    organizer: "Design Collective",
+    organiser: "Design Collective",
     price: "Free",
+    image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800",
+    capacity: "500",
     description: "A showcase of sustainable and urban design projects by graduating students. Explore the future of architecture."
   },
   {
@@ -56,8 +67,10 @@ export const events: Event[] = [
     location: "Law Moot Court",
     category: "Social",
     faculty: "Law",
-    organizer: "Legal Society",
+    organiser: "Legal Society",
     price: "$5",
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800",
+    capacity: "100",
     description: "A high-stakes debate forum on the ethics of AI in modern law. Open to all students for observation and Q&A."
   },
   {
@@ -67,9 +80,11 @@ export const events: Event[] = [
     time: "11:00 AM",
     location: "Hospitality Suite",
     category: "Workshops",
-    faculty: "Hospitality",
-    organizer: "Hospitality School",
+    faculty: "Hospitality Management",
+    organiser: "Hospitality School",
     price: "$10",
+    image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800",
+    capacity: "75",
     description: "Learn the art of fine dining management and hospitality excellence from industry professionals."
   },
   {
@@ -80,8 +95,10 @@ export const events: Event[] = [
     location: "Main Seminar Hall",
     category: "Social",
     faculty: "Humanities & Sciences",
-    organizer: "Science Union",
+    organiser: "Science Union",
     price: "Free",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800",
+    capacity: "300",
     description: "Interdisciplinary research presentations covering everything from climate science to modern philosophy."
   },
   {
@@ -92,8 +109,10 @@ export const events: Event[] = [
     location: "Sports Complex",
     category: "Sports",
     faculty: "Misc",
-    organizer: "Sports Union",
+    organiser: "Sports Union",
     price: "Free",
+    image: "https://images.unsplash.com/photo-1526676037777-05a232554f77?auto=format&fit=crop&q=80&w=800",
+    capacity: "1000",
     description: "The biggest inter-faculty sports competition. Athletics, team sports, and spirit trophies up for grabs!"
   },
   {
@@ -104,8 +123,10 @@ export const events: Event[] = [
     location: "Campus Amphitheatre",
     category: "Music",
     faculty: "Misc",
-    organizer: "Music Society",
+    organiser: "Music Society",
     price: "Free",
+    image: "https://images.unsplash.com/photo-1514525253361-bee8d4a4d651?auto=format&fit=crop&q=80&w=800",
+    capacity: "400",
     description: "A night of acoustic and rock performances by campus bands. Food courts and chill vibes included."
   },
   {
@@ -116,8 +137,10 @@ export const events: Event[] = [
     location: "Grand Ballroom",
     category: "Workshops",
     faculty: "Business",
-    organizer: "Entrepreneurship Club",
+    organiser: "Entrepreneurship Club",
     price: "$15",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800",
+    capacity: "120",
     description: "Keynote speeches from successful alumni and workshops on scaling small businesses."
   },
   {
@@ -128,8 +151,10 @@ export const events: Event[] = [
     location: "Central Square",
     category: "Social",
     faculty: "Misc",
-    organizer: "Student Council",
+    organiser: "Student Council",
     price: "Free",
+    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=800",
+    capacity: "600",
     description: "Celebrating diversity with food, dance, and art from over 20 different cultures represented on campus."
   }
 ];
@@ -140,8 +165,10 @@ export const facultyCategories = [
   "Architecture",
   "Humanities & Sciences",
   "Law",
-  "Hospitality"
+  "Hospitality Management"
 ];
+
+export const faculties = facultyCategories;
 
 export const miscCategories = [
   "Sports",
@@ -156,7 +183,7 @@ export const categoryColors: Record<string, string> = {
   Business: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
   Architecture: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300",
   Law: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
-  Hospitality: "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300",
+  "Hospitality Management": "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300",
   "Humanities & Sciences": "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300",
   Sports: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
   Music: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",

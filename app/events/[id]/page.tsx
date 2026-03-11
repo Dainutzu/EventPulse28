@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { events } from "@/lib/events";
 import { useApp } from "@/context/AppContext";
 import { 
@@ -14,7 +14,8 @@ import {
   Ticket, 
   QrCode, 
   Users,
-  BellRing
+  BellRing,
+  Sparkles
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
@@ -83,6 +84,12 @@ export default function EventDetail() {
             <span className="px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest border border-blue-100 dark:border-blue-500/20">
               {event.category}
             </span>
+            {event.isInterUniversity && (
+              <span className="px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest border border-orange-100 dark:border-orange-500/20 flex items-center gap-1.5 shadow-sm">
+                <Sparkles size={10} className="fill-current" />
+                Inter-University
+              </span>
+            )}
             <span className="px-4 py-1.5 rounded-full bg-neutral-50 dark:bg-neutral-700/50 text-[10px] font-black text-neutral-400 uppercase tracking-widest border border-neutral-100 dark:border-neutral-600">
                {event.faculty}
             </span>

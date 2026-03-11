@@ -7,18 +7,23 @@ import {
   MapPin, 
   QrCode, 
   Download, 
-  Sparkles,
-  ArrowRight,
-  Zap,
+  ArrowRight, 
+  Zap, 
   TrendingUp
 } from "lucide-react";
 import { categoryColors } from "@/lib/events";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
+interface CheckInEvent {
+  id: string;
+  title: string;
+  location: string;
+}
+
 export default function AttendancePage() {
   const { registeredEvents, attendedEvents, points, checkIn, isAttended } = useApp();
-  const [showCheckInModal, setShowCheckInModal] = useState<any>(null);
+  const [showCheckInModal, setShowCheckInModal] = useState<CheckInEvent | null>(null);
 
   const handleDownload = () => {
     const headers = ["Title", "Date", "Category", "Attendance Status"];
@@ -66,12 +71,12 @@ export default function AttendancePage() {
           <div className="relative z-10">
             <p className="text-[10px] font-black text-indigo-200 uppercase tracking-widest mb-1 flex items-center gap-2">
                <Zap size={10} className="fill-current" />
-               Total Pulse Reputation
+               Pulse Reputation Status
             </p>
             <p className="text-4xl font-black text-white tracking-tight">{points} <span className="text-lg opacity-60">XP</span></p>
           </div>
           <div className="px-5 py-2.5 rounded-2xl bg-white/20 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest relative z-10 border border-white/20">
-             Level 1
+             Elite Level
           </div>
         </div>
       </div>
@@ -96,7 +101,7 @@ export default function AttendancePage() {
           </motion.div>
         ) : (
           <div className="space-y-4">
-            {registeredEvents.map((event, i) => {
+            {registeredEvents?.map((event, i) => {
               const attended = isAttended(event.id);
               return (
                 <motion.div
@@ -108,7 +113,7 @@ export default function AttendancePage() {
                 >
                   <div className={`p-6 rounded-[2.5rem] bg-white dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 shadow-sm transition-all ${attended ? "opacity-100 border-green-500/20 bg-green-50/10" : "hover:shadow-md"}`}>
                     <div className="flex justify-between items-start mb-4">
-                      <span className={`inline-block text-[9px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest ${categoryColors[event.category]}`}>
+                      <span className={`inline-block text-[9px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest ${categoryColors[event.category] || 'bg-neutral-100'}`}>
                         {event.category}
                       </span>
                       {attended && (
@@ -153,6 +158,36 @@ export default function AttendancePage() {
             })}
           </div>
         )}
+      </div>
+
+      {/* Leaderboard Section */}
+      <div className="px-6 mt-12 mb-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.3em]">Pulse Leaderboard</h2>
+          <div className="flex items-center gap-1.5 text-orange-500">
+             <Zap size={10} className="fill-current" />
+             <span className="text-[9px] font-black uppercase tracking-widest">Global Ranking</span>
+          </div>
+        </div>
+        
+        <div className="space-y-3 bg-neutral-50 dark:bg-neutral-800/40 p-6 rounded-[2.5rem] border border-neutral-100 dark:border-neutral-800">
+          {[
+            { name: "You", xp: points, rank: "#1", color: "bg-blue-600", active: true },
+            { name: "Sarah K.", xp: 2400, rank: "#2", color: "bg-neutral-200 dark:bg-neutral-700" },
+            { name: "John Deo", xp: 1950, rank: "#3", color: "bg-neutral-200 dark:bg-neutral-700" },
+            { name: "Maya R.", xp: 1800, rank: "#4", color: "bg-neutral-200 dark:bg-neutral-700" },
+          ].map((leader, i) => (
+            <div key={i} className={`flex items-center justify-between p-4 rounded-2xl ${leader.active ? "bg-white dark:bg-neutral-800 shadow-sm border border-blue-500/10" : ""}`}>
+              <div className="flex items-center gap-4">
+                 <div className={`w-8 h-8 rounded-xl ${leader.color} flex items-center justify-center text-[10px] font-black text-white`}>
+                    {leader.rank}
+                 </div>
+                 <p className={`text-xs font-black uppercase tracking-tight ${leader.active ? "text-neutral-900 dark:text-white" : "text-neutral-500"}`}>{leader.name}</p>
+              </div>
+              <p className={`text-[10px] font-black uppercase tracking-widest ${leader.active ? "text-blue-600" : "text-neutral-400"}`}>{leader.xp} XP</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Simulated Check-in Modal */}
