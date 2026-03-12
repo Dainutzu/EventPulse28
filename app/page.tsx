@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/context/AppContext";
 import { motion } from "framer-motion";
 import { Zap, ArrowRight, Sparkles } from "lucide-react";
 
 export default function Home() {
-  const { user, signIn } = useApp();
+  const { signIn } = useApp();
   const router = useRouter();
   const [isNavigating, setIsNavigating] = useState(false);
 

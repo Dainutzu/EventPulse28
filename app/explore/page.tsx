@@ -87,7 +87,7 @@ export default function ExplorePage() {
 
       {/* Events Feed */}
       <div className="px-6 space-y-6">
-        {filteredEvents.length === 0 ? (
+        {filteredEvents?.length === 0 ? (
           <div className="py-20 text-center bg-neutral-50 dark:bg-neutral-800/20 rounded-[3rem] border-2 border-dashed border-neutral-100 dark:border-neutral-800">
              <p className="text-neutral-400 text-sm font-bold">No events found.</p>
              <button onClick={clearFilters} className="text-blue-600 text-xs font-black uppercase tracking-widest mt-4">Reset Search</button>

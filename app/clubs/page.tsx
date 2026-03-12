@@ -11,6 +11,7 @@ import {
   Zap
 } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function ClubsPage() {
   const { toggleFollowClub, isFollowingClub } = useApp();
@@ -49,8 +50,14 @@ export default function ClubsPage() {
                 </div>
 
                 <div className="flex justify-between items-start mb-6">
-                  <div className="w-16 h-16 rounded-[1.8rem] overflow-hidden border border-neutral-100 dark:border-neutral-600 shadow-inner">
-                    <img src={club.image} alt={club.name} className="w-full h-full object-cover" />
+                  <div className="w-16 h-16 rounded-[1.8rem] overflow-hidden border border-neutral-100 dark:border-neutral-600 shadow-inner relative">
+                    <Image 
+                      src={club.image} 
+                      alt={club.name} 
+                      className="w-full h-full object-cover"
+                      fill
+                      unoptimized
+                    />
                   </div>
                   <button
                     onClick={() => toggleFollowClub(club.id)}

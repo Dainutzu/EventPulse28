@@ -24,7 +24,7 @@ export default function ProfilePage() {
 
   const handleDownloadPortfolio = () => {
     const headers = ["Title", "Date", "Category", "Status", "Points Earned"];
-    const rows = registeredEvents.map(event => {
+    const rows = registeredEvents?.map(event => {
       const attended = attendedEvents.includes(event.id);
       return [
         event.title,
@@ -164,7 +164,7 @@ export default function ProfilePage() {
         </div>
         
         <div className="space-y-4">
-          {registeredEvents.length === 0 ? (
+          {registeredEvents?.length === 0 ? (
             <div className="py-12 text-center bg-neutral-50 dark:bg-neutral-800/50 rounded-[2.5rem] border-2 border-dashed border-neutral-100 dark:border-neutral-800">
                <p className="text-neutral-400 text-sm font-bold">No active registrations.</p>
             </div>

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
+import Image from "next/image";
 
 export default function EventDetail() {
   const { id } = useParams();
@@ -42,13 +43,21 @@ export default function EventDetail() {
     <main className="flex flex-col min-h-screen bg-white dark:bg-neutral-900 pb-40 overflow-y-auto">
       {/* Dynamic Banner */}
       <div className="relative h-[45vh] w-full overflow-hidden shrink-0">
-        <motion.img 
+        <motion.div
           initial={{ scale: 1.2 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5 }}
-          src={event.image} 
-          className="w-full h-full object-cover"
-        />
+          className="w-full h-full"
+        >
+          <Image 
+            src={event.image} 
+            alt={event.title}
+            fill
+            className="object-cover"
+            priority
+            unoptimized
+          />
+        </motion.div>
         <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-neutral-900 via-transparent to-transparent" />
         
         {/* Actions Over Banner */}
