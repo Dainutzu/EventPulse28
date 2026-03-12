@@ -9,55 +9,55 @@ export interface Club {
 
 export const clubs: Club[] = [
   {
-    id: "1",
+    id: "leo",
     name: "Leo Club",
     description: "Leadership and community service organization.",
     category: "Service",
     members: "120+",
-    image: "/clubs/leo.jpg"
+    image: "/clubs/leo-club.jpg"
   },
   {
-    id: "2",
+    id: "rotaract",
     name: "Rotaract Club",
     description: "Global network of young professionals serving communities.",
     category: "Service",
     members: "150+",
-    image: "/clubs/rotaract.jpg"
+    image: "/clubs/rotaract-club.jpg"
   },
   {
-    id: "3",
+    id: "gavel",
     name: "Gavel Club",
     description: "Public speaking and leadership development club.",
     category: "Communication",
     members: "85+",
-    image: "/clubs/gavel.jpg"
+    image: "/clubs/gavel-club.jpg"
   },
   {
-    id: "4",
+    id: "debate",
     name: "Debating Society",
     description: "Competitive debate and communication training.",
     category: "Academic",
     members: "60+",
-    image: "/clubs/debate.jpg"
+    image: "/clubs/debate-club.jpg"
   },
   {
-    id: "5",
+    id: "music",
     name: "Music Society",
     description: "Band, performances, and music collaborations.",
     category: "Arts",
     members: "200+",
-    image: "/clubs/music.jpg"
+    image: "/clubs/music-club.jpg"
   },
   {
-    id: "6",
+    id: "entrepreneur",
     name: "Entrepreneurship Club",
     description: "Startup and innovation community.",
     category: "Business",
     members: "110+",
-    image: "/clubs/entrepreneur.jpg"
+    image: "/clubs/entrepreneur-club.jpg"
   },
   {
-    id: "7",
+    id: "sports",
     name: "Sports Union",
     description: "The core of campus sports. Supporting athletes and organizing major meets.",
     category: "Sports",
