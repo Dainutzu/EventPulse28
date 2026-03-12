@@ -104,7 +104,7 @@ export default function ExplorePage() {
             >
               <div className="aspect-[16/9] overflow-hidden relative">
                 <Image 
-                  src={event.image} 
+                  src={event.image || "/events/default-event.jpg"} 
                   alt={event.title}
                   width={800}
                   height={450}

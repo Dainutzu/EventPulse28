@@ -50,7 +50,7 @@ export default function EventDetail() {
           className="w-full h-full"
         >
           <Image 
-            src={event.image} 
+            src={event.image || "/events/default-event.jpg"} 
             alt={event.title}
             fill
             className="object-cover"

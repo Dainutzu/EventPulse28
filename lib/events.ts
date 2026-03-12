@@ -40,7 +40,7 @@ export const events: Event[] = [
     faculty: "Business",
     organiser: "Entrepreneurship Club",
     price: "Free",
-    image: "https://images.unsplash.com/photo-1475721027187-402ad2989a38?auto=format&fit=crop&q=80&w=800",
+    image: "/events/startup-pitch.jpg",
     capacity: "250",
     description: "Pitch your startup idea to actual investors. Gain feedback, networking opportunities, and a chance for seed funding.",
     isInterUniversity: true
@@ -111,13 +111,13 @@ export const events: Event[] = [
     faculty: "Misc",
     organiser: "Sports Union",
     price: "Free",
-    image: "https://images.unsplash.com/photo-1526676037777-05a232554f77?auto=format&fit=crop&q=80&w=800",
+    image: "/events/sports-meet.jpg",
     capacity: "1000",
     description: "The biggest inter-faculty sports competition. Athletics, team sports, and spirit trophies up for grabs!"
   },
   {
     id: "8",
-    title: "Live Music Night",
+    title: "University Music Event",
     date: "May 3, 2026",
     time: "7:30 PM",
     location: "Campus Amphitheatre",
@@ -125,7 +125,7 @@ export const events: Event[] = [
     faculty: "Misc",
     organiser: "Music Society",
     price: "Free",
-    image: "https://images.unsplash.com/photo-1514525253361-bee8d4a4d651?auto=format&fit=crop&q=80&w=800",
+    image: "/events/music-event.jpg",
     capacity: "400",
     description: "A night of acoustic and rock performances by campus bands. Food courts and chill vibes included."
   },

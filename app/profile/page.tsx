@@ -16,6 +16,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function ProfilePage() {
   const { user, registeredEvents, attendedEvents, points, darkMode, toggleDarkMode } = useApp();
@@ -175,16 +176,27 @@ export default function ProfilePage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 onClick={() => setSelectedTicket(event)}
-                className="group relative bg-white dark:bg-neutral-800 p-5 rounded-[2.5rem] border border-neutral-100 dark:border-neutral-700 shadow-sm active:scale-[0.98] transition-all cursor-pointer overflow-hidden"
+                className="group relative bg-white dark:bg-neutral-800 p-5 rounded-[2.5rem] border border-neutral-100 dark:border-neutral-700 shadow-sm active:scale-[0.98] transition-all cursor-pointer overflow-hidden flex gap-4"
               >
-                <div className="absolute right-0 top-0 h-full w-1.5 bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="flex justify-between items-start mb-2">
-                  <span className="text-[10px] font-black text-neutral-400 uppercase tracking-widest">{event.date}</span>
-                  <div className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400">
-                    <QRCodeSVG value={event.ticketId} size={16} />
-                  </div>
+                <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 relative">
+                   <Image 
+                     src={event.image || "/events/default-event.jpg"} 
+                     alt={event.title}
+                     fill
+                     className="object-cover"
+                     unoptimized
+                   />
                 </div>
-                <h3 className="text-lg font-black text-neutral-900 dark:text-white tracking-tight mb-4">{event.title}</h3>
+                <div className="flex-1">
+                  <div className="absolute right-0 top-0 h-full w-1.5 bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="flex justify-between items-start mb-2">
+                    <span className="text-[10px] font-black text-neutral-400 uppercase tracking-widest">{event.date}</span>
+                    <div className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                      <QRCodeSVG value={event.ticketId} size={16} />
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-black text-neutral-900 dark:text-white tracking-tight mb-4">{event.title}</h3>
+                </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-neutral-500">
                     <Eye size={14} />
