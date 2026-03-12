@@ -11,16 +11,12 @@ export default function Home() {
   const router = useRouter();
   const [isNavigating, setIsNavigating] = useState(false);
 
-  useEffect(() => {
-    if (user && !isNavigating) {
-      router.push("/explore");
-    }
-  }, [user, router, isNavigating]);
+  // Removed automatic redirect useEffect to ensure navigation is user-triggered
 
   const handleSignIn = () => {
     setIsNavigating(true);
-    // Initialize demo user
-    signIn("demo.user@university.edu");
+    // Initialize demo user (Demo Mode as per requirements)
+    signIn("demo@university.edu");
     router.push("/explore");
   };
 

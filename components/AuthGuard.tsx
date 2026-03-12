@@ -4,20 +4,22 @@ import { useApp } from "@/context/AppContext";
 import { motion } from "framer-motion";
 import { Mail, Zap, ShieldCheck, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const { user, signIn } = useApp();
   const [isLoading, setIsLoading] = useState(false);
+  const pathname = usePathname();
 
   const handleDemoSignIn = () => {
     setIsLoading(true);
     // Brief premium animation then instant sign-in with pre-filled demo user
     setTimeout(() => {
-      signIn("viyath.desilva@university.edu");
+      signIn("demo@university.edu");
     }, 800);
   };
 
-  if (user) return <>{children}</>;
+  if (user || pathname === "/") return <>{children}</>;
 
   return (
     <div className="fixed inset-0 z-[2000] bg-white dark:bg-neutral-900 flex flex-col items-center justify-center px-8 overflow-hidden">
