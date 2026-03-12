@@ -39,9 +39,9 @@ export default function EventDetail() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen bg-white dark:bg-neutral-900 pb-32">
+    <main className="flex flex-col min-h-screen bg-white dark:bg-neutral-900 pb-40 overflow-y-auto">
       {/* Dynamic Banner */}
-      <div className="relative h-[45vh] w-full overflow-hidden">
+      <div className="relative h-[45vh] w-full overflow-hidden shrink-0">
         <motion.img 
           initial={{ scale: 1.2 }}
           animate={{ scale: 1 }}
@@ -99,6 +99,8 @@ export default function EventDetail() {
             {event.title}
           </h1>
 
+          <h3 className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.3em] mb-6">Event Schedule</h3>
+          
           <div className="space-y-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-neutral-50 dark:bg-neutral-700 flex items-center justify-center text-blue-600">
@@ -133,52 +135,57 @@ export default function EventDetail() {
         </motion.div>
 
         {/* Organiser Section */}
-        <div className="mt-8 px-4 flex items-center justify-between">
-           <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-neutral-900 dark:bg-white flex items-center justify-center text-sm">
-                 🏢
-              </div>
-              <div>
-                <p className="text-[10px] font-black text-neutral-400 uppercase tracking-widest">Organiser</p>
-                <p className="text-xs font-bold text-neutral-900 dark:text-white">{event.organiser}</p>
-              </div>
-           </div>
-           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700">
-              <Users size={12} className="text-neutral-400" />
-              <span className="text-[9px] font-black text-neutral-500 uppercase tracking-widest">{event.capacity} Capacity</span>
-           </div>
+        <div className="mt-12 px-2">
+          <h3 className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.3em] mb-4">Hosted By</h3>
+          <div className="flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/50 p-6 rounded-[2.5rem] border border-neutral-100 dark:border-neutral-700">
+             <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-neutral-900 dark:bg-white flex items-center justify-center text-xl shadow-lg">
+                   🏢
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-neutral-900 dark:text-white">{event.organiser}</p>
+                  <p className="text-[10px] font-black text-neutral-400 uppercase tracking-widest mt-0.5">Verified Organiser</p>
+                </div>
+             </div>
+             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-blue-500/20">
+                <Users size={12} className="text-blue-600" />
+                <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest">{event.capacity} Max</span>
+             </div>
+          </div>
         </div>
 
         {/* Description */}
         <div className="mt-12 px-2">
           <h3 className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.3em] mb-4">About the Event</h3>
-          <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400 leading-relaxed bg-neutral-50 dark:bg-neutral-800/30 p-6 rounded-[2.5rem] border border-neutral-100 dark:border-neutral-700">
             {event.description}
           </p>
         </div>
       </div>
 
-      {/* Persistent Bottom Bar */}
-      <div className="fixed bottom-24 w-full max-w-md px-6 z-40">
-        <div className="p-4 bg-white/10 dark:bg-neutral-900/10 backdrop-blur-2xl rounded-[2.5rem] shadow-sm flex items-center justify-center gap-3">
-          {registered ? (
-            <button
-              onClick={() => setShowQR(true)}
-              className="w-full flex items-center justify-center gap-3 py-5 rounded-[2rem] bg-green-500 text-white font-black text-sm shadow-xl shadow-green-500/30 active:scale-95 transition-all"
-            >
-              <Ticket size={20} />
-              View Digital Ticket
-            </button>
-          ) : (
-            <button
-              onClick={() => registerEvent(event)}
-              className="w-full flex items-center justify-center gap-3 py-5 rounded-[2rem] bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-black text-sm shadow-2xl active:scale-95 transition-all group overflow-hidden relative"
-            >
-              <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-              <QrCode size={20} className="relative z-10" />
-              <span className="relative z-10">Register Securely</span>
-            </button>
-          )}
+      {/* Persistent Bottom Bar - Fixed to very bottom */}
+      <div className="fixed bottom-0 left-0 right-0 w-full z-50">
+        <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-t border-neutral-200 dark:border-neutral-800 p-6 pb-10">
+          <div className="max-w-md mx-auto">
+            {registered ? (
+              <button
+                onClick={() => setShowQR(true)}
+                className="w-full flex items-center justify-center gap-3 py-4 rounded-[1.5rem] bg-green-500 text-white font-black text-sm shadow-xl shadow-green-500/30 active:scale-95 transition-all"
+              >
+                <Ticket size={18} />
+                View Digital Ticket
+              </button>
+            ) : (
+              <button
+                onClick={() => registerEvent(event)}
+                className="w-full flex items-center justify-center gap-3 py-4 rounded-[1.5rem] bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-black text-sm shadow-2xl active:scale-95 transition-all group overflow-hidden relative"
+              >
+                <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                <QrCode size={18} className="relative z-10" />
+                <span className="relative z-10">Register Securely</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

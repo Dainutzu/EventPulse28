@@ -15,6 +15,8 @@ export default function BottomNav() {
     { name: "Profile", icon: User, href: "/profile" },
   ];
 
+  if (pathname.startsWith("/events/")) return null;
+
   return (
     <nav className="fixed bottom-0 w-full max-w-md bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-t border-neutral-100 dark:border-neutral-800 px-6 py-3 pb-8 z-50">
       <div className="flex justify-between items-center">
